@@ -12,10 +12,16 @@ $cklFiles = Get-ChildItem "$scriptRootPath\ckl"
         if([System.IO.Path]::GetExtension($file) -eq ".ckl" ){
             
             [xml]$xmlDocument = get-content $file.FullName
-
-            ([xml]$xmlDocument | Select-Xml -XPath 'CHECKLIST/ASSET/HOST_IP').Node.innerxml 
+            #get host information
+            $HOST_NAME = ([xml]$xmlDocument | Select-Xml -XPath 'CHECKLIST/ASSET/HOST_NAME').Node.innerxml 
+            $HOST_IP   = ([xml]$xmlDocument | Select-Xml -XPath 'CHECKLIST/ASSET/HOST_IP').Node.innerxml 
+            $HOST_MAC  = ([xml]$xmlDocument | Select-Xml -XPath 'CHECKLIST/ASSET/HOST_MAC').Node.innerxml 
+            $HOST_FQDN = ([xml]$xmlDocument | Select-Xml -XPath 'CHECKLIST/ASSET/HOST_FQDN').Node.innerxml 
             
-             
+            $HOST_NAME
+            $HOST_IP 
+            $HOST_MAC 
+            $HOST_FQDN 
 
 
 
